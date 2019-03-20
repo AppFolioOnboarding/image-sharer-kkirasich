@@ -1,0 +1,6 @@
+<h1>Home</h1>
+<%= link_to('Upload a new image', new_image_path) %>
+<br>
+<% @images.each do |img| %>
+  <%= image_tag(img.url, class: 'image') %>
+<% end %>

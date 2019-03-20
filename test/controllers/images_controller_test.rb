@@ -1,7 +1,20 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
-  def test_should_get_new
+  def test_index
+    Image.create!(url: 'https://www.google.com/1')
+    Image.create!(url: 'https://www.google.com/2')
+
+    get root_path
+    assert_response :ok
+
+    assert_select 'img' do |images|
+      assert_equal images[0].attr('src'), 'https://www.google.com/2'
+      assert_equal images[1].attr('src'), 'https://www.google.com/1'
+    end
+  end
+
+  def test_new
     get new_image_path
 
     assert_response :success
