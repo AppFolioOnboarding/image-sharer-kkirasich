@@ -1,6 +1,11 @@
 <h1>Home</h1>
 <%= link_to('Upload a new image', new_image_path) %>
 <br>
+<% @images.flat_map{ |img| img.tag_list }.uniq.each do |tag| %>
+  <%= link_to tag, images_path(tag: tag) %>
+<% end %>
+
+<br>
 <% @images.each do |img| %>
   <%= image_tag(img.url, class: 'image') %>
 <% end %>
