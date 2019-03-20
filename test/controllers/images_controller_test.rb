@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
-  def test_should_get_new
+  def test_new
     get new_image_path
 
     assert_response :success
