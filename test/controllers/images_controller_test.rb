@@ -19,6 +19,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select 'h1', 'Enter URL'
+    assert_select 'input[name="image[url]"]'
+    assert_select 'input[name="image[tag_list]"]'
   end
 
   def test_show
@@ -27,6 +29,19 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select 'img[src="https://www.google.com"]'
+  end
+
+  def test_show_with_tags
+    Image.create!(url: 'https://www.google.com', tag_list: 'dog, web')
+    get image_path(Image.last)
+
+    assert_response :success
+    assert_select 'img[src="https://www.google.com"]'
+
+    assert_select '.js-tag' do |tags|
+      assert_equal tags[0].text, 'dog'
+      assert_equal tags[1].text, 'web'
+    end
   end
 
   def test_create
