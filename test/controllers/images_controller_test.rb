@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
+  def test_index
+    get root_path
+    assert_response :ok
+    assert_select 'h1', 'Home'
+  end
+
   def test_new
     get new_image_path
 
