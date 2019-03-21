@@ -2,4 +2,6 @@
   <p class="js-tag"><%= tag %></p>
 <% end %>
 
+<%= button_to 'Delete', image_path(@image), method: :delete, data: {confirm: 'Are you sure?' } %>
+
 <%= image_tag(@image.url) %>
