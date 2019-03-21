@@ -7,5 +7,5 @@
 
 <br>
 <% @images.each do |img| %>
-  <%= image_tag(img.url, class: 'image') %>
+  <%= link_to image_tag(img.url, class: 'image'), image_path(id: img.id) %>
 <% end %>

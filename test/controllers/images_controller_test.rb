@@ -8,7 +8,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :ok
 
-    assert_select 'img' do |images|
+    assert_select 'a > img' do |images|
       assert_equal images[0].attr('src'), 'https://www.google.com/2'
       assert_equal images[1].attr('src'), 'https://www.google.com/1'
     end
