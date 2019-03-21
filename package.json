@@ -9,7 +9,8 @@
     "coffeescript": "1.12.7",
     "prop-types": "^15.6.1",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "reactstrap": "^7.1.0"
   },
   "devDependencies": {
     "assert": "^1.4.1",
