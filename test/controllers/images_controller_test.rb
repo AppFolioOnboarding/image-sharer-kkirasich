@@ -8,7 +8,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :ok
 
-    assert_select 'img' do |images|
+    assert_select 'a > img' do |images|
       assert_equal images[0].attr('src'), 'https://www.google.com/2'
       assert_equal images[1].attr('src'), 'https://www.google.com/1'
     end
@@ -84,5 +84,22 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select '.error', 'must be a valid URL'
+  end
+
+  def test_destroy
+    Image.create!(url: 'https://www.google.com')
+    assert_difference('Image.count', -1) do
+      delete image_path(Image.last.id)
+    end
+
+    assert_redirected_to images_path
+  end
+
+  def test_destroy_not_existing
+    assert_no_difference('Image.count') do
+      delete image_path(1)
+    end
+
+    assert_redirected_to images_path
   end
 end
